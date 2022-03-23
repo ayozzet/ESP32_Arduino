@@ -1,42 +1,26 @@
-const int trigPin = 5;
-const int echoPin = 18;
+#define TRIG_PIN 5 
+#define ECHO_PIN 18 
 
-#define SOUND_SPEED 0.034
-#define CM_TO_INCH 0.393701
-
-long duration;
-float distanceCm;
-float distanceInch;
+float duration_us, distance_cm;
 
 void setup() {
-  Serial.begin(9600); 
-  pinMode(trigPin, OUTPUT); 
-  pinMode(echoPin, INPUT); 
+  Serial.begin (9600);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
 }
 
 void loop() {
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
+  digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  
-  // Calculate the distance
-  distanceCm = duration * SOUND_SPEED/2;
-  
-  // Convert to inches
-  distanceInch = distanceCm * CM_TO_INCH;
-  
-  // Prints the distance in the Serial Monitor
-  Serial.print("Distance (cm): ");
-  Serial.println(distanceCm);
-  Serial.print("Distance (inch): ");
-  Serial.println(distanceInch);
-  
-  delay(1000);
+  digitalWrite(TRIG_PIN, LOW);
+
+  duration_us = pulseIn(ECHO_PIN, HIGH);
+
+  distance_cm = 0.017 * duration_us;
+
+  Serial.print("distance: ");
+  Serial.print(distance_cm);
+  Serial.println(" cm");
+
+  delay(500);
 }
