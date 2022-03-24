@@ -7,10 +7,5 @@ void setup() {
 
 void loop() {
   int data = digitalRead(ir);
-  //if (data == HIGH){
-    Serial.println(data);
-  //}
-  //else{
-  //Serial.println("BAD");
-  //}
+  Serial.println(data);
 }
