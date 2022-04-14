@@ -20,9 +20,11 @@ void loop() {
   if (state1 == HIGH) {
     while (state2 == LOW) {
       int state2 = digitalRead(btn2);
-      digitalWrite(led1, HIGH);
       servo1.write(180);
-      delay(500);
+      digitalWrite(led1, HIGH);
+      delay(250);
+      digitalWrite(led1, LOW);
+      delay(250);
       if (state2 == HIGH) {
         digitalWrite(led1, LOW);
         servo1.write(0);
